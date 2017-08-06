@@ -40,7 +40,7 @@ const ENV = process.env.npm_lifecycle_event,
 
 module.exports = function makeWebpackConfig() {
 
-  const _aotEnabled = dotenv.AOT || '',
+  const _ngCompiler = dotenv.COMPILER || 'JIT',
         _browserSrc = dotenv.BROWSER_SRC || 'src/browser',
         _browserDest = dotenv.BROWSER_DEST || 'dist',
         _srcDir = path.join(rootDir, _browserSrc) || root(_browserSrc),
@@ -64,7 +64,7 @@ module.exports = function makeWebpackConfig() {
   ;
    
   if (isProd) { console.log('Compiling Production'); } else { console.log('Compiling Development'); }
-  if (_aotEnabled) { console.log('Compiling AOT'); } else { console.log('Compiling JIT'); }
+  if (_ngCompiler === 'AOT') { console.log('Compiling AOT'); } else { console.log('Compiling JIT'); }
   /**
    * Config
    * Reference: http://webpack.github.io/docs/configuration.html
@@ -92,7 +92,7 @@ module.exports = function makeWebpackConfig() {
      * Entry
      * Reference: http://webpack.github.io/docs/configuration.html#entry
      */
-    const _entry_path = isProd ? (_aotEnabled ? _entry_prod_aot : _entry_prod) : (_aotEnabled ? _entry_dev_aot : _entry_dev);
+    const _entry_path = isProd ? (_ngCompiler === 'AOT' ? _entry_prod_aot : _entry_prod) : (_ngCompiler === 'AOT' ? _entry_dev_aot : _entry_dev);
     console.log('Entry Path: ', _entry_path);
     config.entry = isTest ? {} : {
       'polyfills': _polyfills,
@@ -130,7 +130,7 @@ module.exports = function makeWebpackConfig() {
   const tsconfigBrowser = path.join(_scriptsDir, 'tsconfig-browser.json');
   const tsconfigBrowserAOT = path.join(rootDir, 'tsconfig-aot.json');
 
-  let atlOptions = `configFileName=${((_aotEnabled)?tsconfigBrowserAOT:tsconfigBrowser)}&`;
+  let atlOptions = `configFileName=${((_ngCompiler === 'AOT')?tsconfigBrowserAOT:tsconfigBrowser)}&`;
   if (isTest && !isTestWatch) {
     // awesome-typescript-loader needs to output inlineSourceMap for code coverage to work with source maps.
     atlOptions = `${atlOptions}inlineSourceMap=true&sourceMap=false&`;
