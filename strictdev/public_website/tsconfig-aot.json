@@ -1,0 +1,18 @@
+{
+  "extends": "../../_scripts/tsconfig-aot.json",
+  "compilerOptions": {
+    "outDir": "./generated"
+  },
+  "include": [
+    "src/browser/**/*.ts",
+    "src/providers/**/*.ts",
+    "src/models/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules/**/*",
+    "aot/**/*"
+  ],
+  "angularCompilerOptions": {
+    "genDir": "aot"
+  }  
+}
