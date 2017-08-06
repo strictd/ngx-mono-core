@@ -1,78 +1,23 @@
-# NGX-MONO
+# NGX-MONO-CORE
 # Strict Development Monorepo for Angular
 
-# Setups
 
-## Quick start
+There are no active projects in this repo. For an example goto the [public_website](https://github.com/strictd/ngx-mono-core/tree/public_website) branch
 
-* clone our repo
-* change directory to your app
-* install the dependencies with npm
-* start the example registration server
-* go to [http://localhost:8080](http://localhost:8080) in your browser.
+
+## Public Website Setup Instructions
+Once you've clone the repo install the node_modules in your projects root directory
+Checkout the public_website branch for the basic website example, change directory to the added strictdev/public_website project
+run npm start script in package. runs webpack-dev-server using config from core _scripts/webpack-ng.js and the local .env dotenv file.
 
 ```
-git clone --depth=1 http://github.com/strictd/ngx-mono.git
-cd ngx-mono
+git clone https://github.com/strictd/ngx-mono-core
+cd ngx-mono-core
 npm install
-npm start
-
+git checkout public_website
+cd strictdev/public_website
+npm run start
 ```
 
-## Slate Docs of [https://github.com/strictd/ngx-mono/tree/master/strictdev/docs](https://github.com/strictd/ngx-mono/tree/master/strictdev/docs)
-```
-npm run docs
-```
-
-## Requirements
-* Node
-* NPM
-
-### Windows
-
-### Mac
-
-### Linux
-
-## Adding NPM Modules
-Make sure you are in the ngx-mono root before adding npm modules
-
-```bash
-npm install mymodule --save-dev
-```
-
-## Building an API
-```
-node ../../node_modules/webpack/bin/webpack.js ./src/api/entry-point.ts ./bin/output-script.js --config ../../node_modules/ngx-mono/_scripts/webpack-cli.js
-```
-
-## Starting Built API
-```
-node ./bin/output-script.js
-```
-
-## Ionic Development
-### Building
-```
-node ../../node_modules/@ionic/app-scripts/bin/ionic-app-scripts.js build
-```
-
-### Serving
-```
-node ../../node_modules/@ionic/app-scripts/bin/ionic-app-scripts.js serve
-```
-
-### Mobile App
-#### Setup
-```
-npm install -g cordova ionic
-cordova platform add android
-node ../../node_modules/@ionic/app-scripts/bin/ionic-app-scripts.js build
-```
-
-#### Compile Mobile App
-```
-cordova build android
-```
 
 
