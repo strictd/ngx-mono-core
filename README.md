@@ -2,7 +2,7 @@
 # Strict Development Monorepo for Angular
 
 
-There are no active projects in this repo. For an example goto the [public_website](https://github.com/strictd/ngx-mono-core/tree/public_website) branch
+There are no active projects in master branch of this repo. For an example goto the [public_website](https://github.com/strictd/ngx-mono-core/tree/public_website) branch
 
 
 ## Public Website Setup Instructions
