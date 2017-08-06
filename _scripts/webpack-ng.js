@@ -32,7 +32,8 @@ const ENV = process.env.npm_lifecycle_event,
       isTest = ENV === 'test' || isTestWatch,
       buildEnv = ENV.match(/.*?(:)?build/g),
       prodEnv = ENV.match(/.*?(:)?prod/g),
-      isProd = ((buildEnv && buildEnv.length) || (prodEnv && prodEnv.length)),
+      nodeEnv = dotenv.NODE_ENV || 'DEVELOPMENT',
+      isProd = ((nodeEnv.toUpperCase() !== 'DEVELOPMENT' && nodeEnv.toUpperCase() === 'PRODUCTION') || (buildEnv && buildEnv.length) || (prodEnv && prodEnv.length)),
       useHash = false
 ;
 
