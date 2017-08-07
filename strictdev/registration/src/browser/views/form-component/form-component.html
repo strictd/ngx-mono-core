@@ -1,0 +1,52 @@
+<div class="form-content">
+  <form #regForm="ngForm"  (ngSubmit)="submitApplication()">
+
+    <div class="form-group row">
+      <label class="col-sm-3">Name<span *ngIf="name.errors" style="color: red">*</span></label>
+      <div class="col-sm-9">
+        <input type="text" #name="ngModel" [class.required]="name.errors" class="form-control" required [(ngModel)]="form.name" name="name" placeholder="Name" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3">Phone<span *ngIf="phone_area.errors || phone.errors" style="color: red">*</span></label>
+      <div class="col-sm-2">
+        <input type="tel" #phone_area="ngModel" class="form-control" [class.required]="phone_area.errors" required [(ngModel)]="form.phone_area" name="phone_area" maxlength="3" placeholder="###" />
+      </div>
+      <div class="col-sm-7">
+        <input type="tel" #phone="ngModel" class="form-control" [class.required]="phone.errors" required [(ngModel)]="form.phone" name="phone" placeholder="###-####" />
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label class="col-sm-12 col-form-label">Types of Items?</label>
+      <div class="col-sm-12">
+        <textarea rows="4" class="form-control" [(ngModel)]="form.item_types" name="item_types" placeholder=""></textarea>
+      </div>
+    </div> 
+    
+    <div class="form-group row">
+      <label class="col-sm-12 col-form-label">Needs and Requests?</label>
+      <div class="col-sm-12">
+        <textarea rows="4" class="form-control" [(ngModel)]="form.requests" name="requests" placeholder=""></textarea>
+      </div>
+    </div>
+
+    <recaptcha-component *ngIf="recaptchaSiteKey" #reCaptcha [isRequired]="[true]" rewidth="305px" [sitekey]='recaptchaSiteKey' (resolved)='recaptchaResolved($event)' (expired)='recaptchaExpired()'></recaptcha-component>
+    
+    <hr />
+
+    <div class="row">
+      <div class="col-sm-12" style="text-align: center">
+        <br />
+        <div *ngIf="!regForm.form.valid || (recaptchaSiteKey && !gotCaptcha)">
+          Must fill out all Required fields, marked with <span style="border:1px solid red;">Red<span style="color: red">*</span></span>, before submitting
+        </div>
+
+        <button type="submit" *ngIf="!sending && (!recaptchaSiteKey || gotCaptcha) && regForm.form.valid" [disabled]="!regForm.form.valid" class="btn btn-danger">Sign up</button>
+        <button type="submit" *ngIf="!sending && ((recaptchaSiteKey && !gotCaptcha) || !regForm.form.valid)" [disabled]="!regForm.form.valid || (recaptchaSiteKey && !gotCaptcha)" class="btn btn-danger">Must Complete All Red Form Fields</button>
+        <button type="button" *ngIf="sending" [disabled]="true" class="btn btn-danger">... Please Wait, Processing ...</button>
+      </div>
+    </div>
+  </form>
+</div>
